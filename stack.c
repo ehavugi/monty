@@ -25,7 +25,6 @@ int push(stack_t *head, int n)
 	}
 	if (head == NULL)
 	{
-		printf("new stack\n");
 		head = new;
 	}
 	else
