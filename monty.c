@@ -27,9 +27,9 @@ int get_token(char *line, stack_t *head, int line_index)
 	if (strcmp(token, "push") == 0)
 	{
 		token = strtok(NULL, " ");
-		if (token == NULL || (atoi(token) == 0 && strcmp(token,"0") != 0))
+		if (token == NULL || (atoi(token) == 0 && strcmp(token, "0") != 0))
 		{
-			fprintf(stderr,"L%d: usage: push integer", line_index);
+			fprintf(stderr, "L%d: usage: push integer\n", line_index);
 			exit(EXIT_FAILURE);
 		}
 		push(head, atoi(token));
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 		filename = argv[1];
 	else
 	{
-		fprintf(stderr,"USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
