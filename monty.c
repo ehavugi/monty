@@ -35,10 +35,13 @@ int get_token(char *line, stack_t *head, int line_index)
 		push(head, atoi(token));
 		return (0);
 	}
+	else if (strcmp(token, "pint") == 0)
+	{
+		pint(head, line_index);
+	}
 	else if (strcmp(token, "pall") == 0)
 	{
 		pall(head);
-		return (0);
 	}
 	else
 	{

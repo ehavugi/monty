@@ -47,6 +47,10 @@ int push(stack_t *head, int n)
  */
 int pall(stack_t *head)
 {
+	if (head  == NULL)
+	{
+		return (0);
+	}
 	while (head->next != NULL)
 	{
 		head = head->next;
@@ -56,5 +60,31 @@ int pall(stack_t *head)
 		printf("%d\n", head->n);
 		head = head->prev;
 	}
+	return (0);
+}
+
+/**
+ * pint - print top of stack
+ * @head: stack pointer
+ * @line_index: line number
+ * Return: exit code
+ */
+int pint(stack_t *head, int line_index)
+{
+	if (head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_index);
+		exit(EXIT_FAILURE);
+	}
+	while (head->next != NULL)
+	{
+		head = head->next;
+	}
+	if (head->n == -1)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_index);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", head->n);
 	return (0);
 }
