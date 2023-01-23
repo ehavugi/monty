@@ -60,17 +60,21 @@ int get_token(char *line, stack_t *head, int line_index)
 int process_file(const char *filename, stack_t *head, char *buff)
 {
 	int fd;
-	ssize_t n = 0;
-	char *line  = malloc(BUFFER_SIZE);
+	ssize_t n;
+	char *line;
 	int index = 0;
 	int line_index = 1;
 	int line_char = 0;
 
+	line  = malloc(BUFFER_SIZE);
 	line[0] = ' ';
+
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		free(line);
+		free_stack(head);
 		exit(EXIT_FAILURE);
 	}
 	n = read(fd, buff, BUFFER_SIZE);
@@ -82,10 +86,7 @@ int process_file(const char *filename, stack_t *head, char *buff)
 			if (buff[index] == '\n')
 			{
 				line[line_char] = '\0';
-				if (get_token(line, head, line_index) == EXIT_FAILURE)
-				{
-					exit(EXIT_FAILURE);
-				}
+				get_token(line, head, line_index);
 				line_index += 1;
 				line_char = 0;
 			}
@@ -107,32 +108,34 @@ int process_file(const char *filename, stack_t *head, char *buff)
  */
 int main(int argc, char *argv[])
 {
-	const char *filename;
+
 	stack_t *head = malloc(sizeof(stack_t));
 	char *buff = malloc(BUFFER_SIZE);
 
-	if (head == NULL)
-		return (5);
-	head->n = -1;
-	head->prev = NULL;
-	head->next = NULL;
-	if (buff == NULL)
+	/*
+	 * instruction_t instructions[10];
+	 * instructions = {
+		{'push',push},
+		{'pall',pall},
+		{'pint',pint},
+		{NULL, NULL}
+		*/
+	if (buff == NULL || head == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (argc == 2)
-		filename = argv[1];
-	else
+	head->n = -1; /* to find a robust way to initialize a stack*/
+	head->prev = NULL;
+	head->next = NULL;
+	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
-	if (filename == NULL)
-		return (0);
-	process_file(filename, head, buff);
-	free(head);
+	process_file(argv[1], head, buff);
 	free(buff);
+	free_stack(head);
 	exit(EXIT_SUCCESS);
 }

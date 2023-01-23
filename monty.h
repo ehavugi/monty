@@ -33,5 +33,5 @@ int push(stack_t *head, int n);
 int pop(stack_t *head);
 int pall(stack_t *head);
 int pint(stack_t *head, int line);
-
+int free_stack(stack_t *head);
 #endif

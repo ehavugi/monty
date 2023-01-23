@@ -47,18 +47,20 @@ int push(stack_t *head, int n)
  */
 int pall(stack_t *head)
 {
-	if (head  == NULL)
+	stack_t *temp  = head;
+
+	if (temp  == NULL)
 	{
 		return (0);
 	}
-	while (head->next != NULL)
+	while (temp->next != NULL)
 	{
-		head = head->next;
+		temp = temp->next;
 	}
-	while (head->prev != NULL)
+	while (temp->prev != NULL)
 	{
-		printf("%d\n", head->n);
-		head = head->prev;
+		printf("%d\n", temp->n);
+		temp = temp->prev;
 	}
 	return (0);
 }

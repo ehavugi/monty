@@ -4,7 +4,9 @@
 #./monty
 rm monty
 gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
-./monty bytecodes/001.m
+file1='bytecodes/001.m'
+echo $file1;
+./monty $file1
 ./monty bytecodes/000.m
 ./monty bytecodes/03.m
 ./monty byex
