@@ -51,7 +51,7 @@ int pall(stack_t *head)
 
 	if (temp  == NULL)
 	{
-		return (0);
+		return (1);
 	}
 	while (temp->next != NULL)
 	{
@@ -76,16 +76,16 @@ int pint(stack_t *head, int line_index)
 	if (head == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_index);
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	while (head->next != NULL)
 	{
 		head = head->next;
 	}
-	if (head->n == -1)
+	if (head->prev == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_index);
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	printf("%d\n", head->n);
 	return (0);
