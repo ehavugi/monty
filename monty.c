@@ -42,8 +42,16 @@ int get_token(char *line, stack_t *head, int line_index)
 	}
 	else if (strcmp(token, "pall") == 0)
 	{
-		exit_code = pall(head);
-	}
+		exit_code = pall(head); }
+	else if (strcmp(token, "nop") == 0)
+	{
+		exit_code = 0; }
+	else if (strcmp(token, "add") == 0)
+	{
+		exit_code = add(head, line_index); }
+	else if (strcmp(token, "swap") == 0)
+	{
+		exit_code = swap(head, line_index); }
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_index, token);

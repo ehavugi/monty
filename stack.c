@@ -90,3 +90,65 @@ int pint(stack_t *head, int line_index)
 	printf("%d\n", head->n);
 	return (0);
 }
+
+/**
+ * swap - swap
+ * @head: stack pointer
+ * @line_index: index of line
+ * Return: 0
+ */
+int swap(stack_t *head, int line_index)
+{
+	stack_t *temp;
+
+	if (head == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_index);
+		return (EXIT_FAILURE);
+	}
+	if (head->prev != NULL)
+	{
+		if ((head->prev)->prev != NULL)
+		{
+			temp = head->prev;
+			temp->next = NULL;
+			temp->prev = head;
+			head = head->prev;
+			head->next = temp;
+		}
+	}
+	return (0);
+}
+
+/**
+ * add - add
+ * @head: head
+ * @line: line index
+ * Return:0
+ */
+int add(stack_t *head, int line)
+{
+	stack_t *temp;
+
+	if (head == NULL)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line);
+		return (EXIT_FAILURE);
+	}
+	if (head->prev !=  NULL)
+	{
+		if (head->prev->prev != NULL)
+		{
+			temp = head->prev;
+			temp->n = (head->prev)->n + head->n;
+			temp->prev = head->prev->prev;
+			temp->next = NULL;
+			head = temp;
+		}
+		else
+		{
+			return (1);
+		}
+	}
+	return (0);
+}
